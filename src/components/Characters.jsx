@@ -5,6 +5,7 @@ import ThemeContext from '../context/ThemeContext';
 export default function Characters() {
 	const [characters, setCharacters] = useState([]);
 	const { theme } = useContext(ThemeContext);
+
 	useEffect(() => {
 		fetch("https://rickandmortyapi.com/api/character/")
 			.then(response => response.json())
@@ -15,6 +16,7 @@ export default function Characters() {
 			})
 	}, [])
 
+	// dark mode settings
 	const themeCard = theme ? "character-card dark-card" : "character-card light-card";
 	const themeText = theme ? "light-text" : "dark-text"
 	
