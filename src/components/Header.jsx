@@ -10,11 +10,13 @@ export default function Header() {
 		setTheme(!theme)
 	}
 
+	const themeText = darkMode ? "light-text" : "dark-text";
+
 	return (
 		<div className="container">
-			<h1>React Hooks</h1>
-			<button onClick={handleClick}>{ darkMode ? "Dark Mode" : "Light Mode" }</button>
-			<p>Dark Mode? {darkMode.toString()}</p>
+			<h1 className={themeText}>React Hooks</h1>
+			<button onClick={handleClick} className="main-button">{ darkMode ? "Light Mode" : "Dark Mode" }</button>
+			<p>Dark Mode? {theme.toString()}</p>
 		</div>
 	)
 }

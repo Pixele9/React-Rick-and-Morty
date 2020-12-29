@@ -10,10 +10,10 @@ import ThemeContext from './context/ThemeContext';
 function App() {
   const { theme } = useContext(ThemeContext);
 
-  const backgroundClass = theme ? "dark" : "light"
+  const backgroundClass = theme ? "App dark" : "App light"
 
   return (
-    <div className="App">
+    <div className={backgroundClass}>
       <Header />
       <Characters />
       {/* <h1>Hello World</h1> */}
