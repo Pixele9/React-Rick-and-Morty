@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useReducer } from "react";
+import React, { useState, useEffect, useContext, useReducer, useMemo } from "react";
 
 import ThemeContext from '../context/ThemeContext';
 
@@ -23,6 +23,7 @@ const favoriteReducer = (state, action) => {
 export default function Characters() {
 	const [characters, setCharacters] = useState([]);
 	const [favorites, dispatch] = useReducer(favoriteReducer, initialState)
+	const [search, setSearch] = useState("")
 
 	const { theme } = useContext(ThemeContext);
 
@@ -30,15 +31,20 @@ export default function Characters() {
 		fetch("https://rickandmortyapi.com/api/character/")
 			.then(response => response.json())
 			.then(data => setCharacters(data.results))
-			// .then(data => {
-			// 	console.log(JSON.stringify(data.results))
-			// 	setCharacters(data.results)
-			// })
+			// .then(data => { console.log(JSON.stringify(data.results)); setCharacters(data.results) })
 	}, [])
 
 	const handleClick = favorite => {
 		dispatch({ type: ADD_TO_FAVORITE, payload: favorite })
 	}
+	
+	const handleSearch = e => {
+		setSearch(e.target.value)
+	}
+
+	const filteredChars = characters.filter(char => {
+		return char.name.toLowerCase().includes(search.toLowerCase())
+	})
 
 	// dark mode settings
 	const themeCard = theme ? "character-card dark-bg" : "character-card light-bg";
@@ -46,26 +52,31 @@ export default function Characters() {
 	const themeBg = theme ? "dark-bg" : "light-bg";
 	
 	return (
-		<div className="content">
+		<>
+			<div className="search-container">
+				<input className="search-input" type="text" value={search} onChange={handleSearch} />
+			</div>
+			
+			<div className="content">
+				{favorites.favorites.map(favorite => (
+					<li key={favorite.id}>
+						{favorite.name}
+					</li>
+				))}
 
-			{favorites.favorites.map(favorite => (
-				<li key={favorite.id}>
-					{favorite.name}
-				</li>
-			))}
-
-			{
-				characters.map((character) => (
-					<div className={themeCard}>
-						<img src={character.image} className="character-image" alt="character"/>
-						<div className="character-description" key={character.id}>
-							<h3 className={themeText}>{character.name}</h3>
-							<p className={themeText}>{character.description}</p>
-							<button type="button" className={`${themeText} ${themeBg}`} onClick={() => handleClick(character)}>Add to Favorites</button>
+				{
+					filteredChars.map((character) => (
+						<div className={themeCard}>
+							<img src={character.image} className="character-image" alt="character"/>
+							<div className="character-description" key={character.id}>
+								<h3 className={themeText}>{character.name}</h3>
+								<p className={themeText}>{character.description}</p>
+								<button type="button" className={`${themeText} ${themeBg}`} onClick={() => handleClick(character)}>Add to Favorites</button>
+							</div>
 						</div>
-					</div>
-				))
-			}
-		</div>
+					))
+				}
+			</div>
+		</>
 	);
 }
