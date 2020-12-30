@@ -17,7 +17,7 @@ export default function Characters() {
 	}, [])
 
 	// dark mode settings
-	const themeCard = theme ? "character-card dark-card" : "character-card light-card";
+	const themeCard = theme ? "character-card dark-bg" : "character-card light-bg";
 	const themeText = theme ? "light-text" : "dark-text"
 	
 	return (
@@ -27,7 +27,7 @@ export default function Characters() {
 					<div className={themeCard}>
 						<img src={character.image} className="character-image" alt="character"/>
 						<div className="character-description">
-							<h2 className={themeText}>{character.name}</h2>
+							<h3 className={themeText}>{character.name}</h3>
 							<p className={themeText}>{character.description}</p>
 						</div>
 					</div>

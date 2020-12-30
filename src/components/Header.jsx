@@ -11,12 +11,13 @@ export default function Header() {
 	}
 
 	const themeText = darkMode ? "light-text" : "dark-text";
+	const themeBg = darkMode ? "dark-bg" : "light-bg";
 
 	return (
-		<div className="container">
-			<h1 className={themeText}>React Hooks</h1>
-			<button onClick={handleClick} className="main-button">{ darkMode ? "Light Mode" : "Dark Mode" }</button>
-			<p>Dark Mode? {theme.toString()}</p>
+		<div className="header-container">
+			<h1 className={`main-title ${themeText}`}>React Hooks</h1>
+			<button onClick={handleClick} className={`main-button ${themeBg} ${themeText}`}>{ darkMode ? "Light Mode" : "Dark Mode" }</button>
+			{/* <p>Dark Mode? {theme.toString()}</p> */}
 		</div>
 	)
 }

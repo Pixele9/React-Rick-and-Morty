@@ -26,7 +26,7 @@ code {
   color: #24282f;
 }
 
-.dark-card {
+.dark-bg {
   background-color: #3c3e44;
 }
 
@@ -38,14 +38,39 @@ code {
   color: #fff;
 }
 
-.light-card {
+.light-bg {
   background-color: #f5f5f5;
 }
 
-.main-button {
-  width: 
-}
 
+.header-container {
+	display: flex;
+	justify-content: center;
+}
+	.main-button {
+		width: 8em;
+		height: 2.5em;
+		position: absolute;
+		top: 20px;
+		right: 30px;
+		border-radius: 0.6em;
+		border: none;
+		--tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+		box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+		var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+		transition: 400ms all;
+	}
+	.main-button:hover {
+		transition: 400ms all;
+		cursor: pointer;
+		--tw-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+		0 10px 10px -5px rgba(0, 0, 0, 0.04);
+		box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+		var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+	}
+	.main-button:focus {
+		outline: none;
+	}
 .content {
 	display: flex;
 	width: 100%;
@@ -54,15 +79,15 @@ code {
 }
 
 .character-card {
-  width: 25em;
+	width: 25em;
 	height: 10em;
 	border-radius: 0.5em;
 	margin-bottom: 2em;
 	transition: 300ms all;
 	--tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 	box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
-    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-  display: flex;
+	var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+	display: flex;
 	/* padding: 0.4em; */
 	/* overflow: hidden; */
 }
