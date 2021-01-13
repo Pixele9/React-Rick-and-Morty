@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useReducer, useMemo } from "react";
+import React, { useState, useEffect, useContext, useReducer, useMemo, useRef } from "react";
 
 import ThemeContext from '../context/ThemeContext';
 
@@ -25,6 +25,8 @@ export default function Characters() {
 	const [favorites, dispatch] = useReducer(favoriteReducer, initialState)
 	const [search, setSearch] = useState("")
 
+	const searchInput = useRef(null)
+
 	const { theme } = useContext(ThemeContext);
 
 	useEffect(() => {
@@ -38,13 +40,19 @@ export default function Characters() {
 		dispatch({ type: ADD_TO_FAVORITE, payload: favorite })
 	}
 	
-	const handleSearch = e => {
-		setSearch(e.target.value)
+	const handleSearch = () =>  {
+		setSearch(searchInput.current.value)
 	}
 
-	const filteredChars = characters.filter(char => {
-		return char.name.toLowerCase().includes(search.toLowerCase())
-	})
+	// const filteredChars = characters.filter(char => {
+	// 	return char.name.toLowerCase().includes(search.toLowerCase())
+	// })
+
+	const filteredChars = useMemo(() => 
+		characters.filter(char => {
+			return char.name.toLowerCase().includes(search.toLowerCase())
+		}),
+	[characters, search])
 
 	// dark mode settings
 	const themeCard = theme ? "character-card dark-bg" : "character-card light-bg";
@@ -54,7 +62,7 @@ export default function Characters() {
 	return (
 		<>
 			<div className="search-container">
-				<input className="search-input" type="text" value={search} onChange={handleSearch} />
+				<input className="search-input" ref={searchInput} type="text" value={search} onChange={handleSearch} />
 			</div>
 			
 			<div className="content">
